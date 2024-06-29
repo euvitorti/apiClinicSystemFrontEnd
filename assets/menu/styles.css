@@ -24,6 +24,7 @@ body {
     padding: 2rem;
     width: 20%;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
 }
@@ -55,7 +56,7 @@ body {
 .main-content {
     background: #fff; /* Cor de fundo para o conteúdo principal */
     padding: 2rem;
-    flex: 1; /* Ocupa todo o espaço restante */
+    flex: 1rem; /* Ocupa todo o espaço restante */
     display: flex;
     justify-content: center;
     align-items: center;
