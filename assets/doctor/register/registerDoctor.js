@@ -1,16 +1,15 @@
-// Função para recuperar o token do armazenamento local
-function getToken() {
-    return localStorage.getItem('Bearer Token');
-}
+import { getDefaultHeaders } from '../../header/header';
 
 // Função para registrar um novo paciente
-function registerPatient(event) {
+function registerDoctor(event) {
     event.preventDefault();
 
     // Captura os valores dos campos de entrada
     var name = document.querySelector('#name').value;
     var email = document.querySelector('#email').value;
     var phone = document.querySelector('#phone').value;
+    var crm = document.querySelector('#crm').value;
+    var specialty = document.querySelector('#specialty').value;
     var cpf = document.querySelector('#cpf').value;
     var street = document.querySelector('#street').value;
     var neighborhood = document.querySelector('#neighborhood').value;
@@ -25,6 +24,8 @@ function registerPatient(event) {
         name: name,
         email: email,
         phone: phone,
+        crm: crm,
+        specialty: specialty,
         cpf: cpf,
         address: {
             street: street,
@@ -42,12 +43,9 @@ function registerPatient(event) {
     var token = getToken();
 
     // Envia uma requisição POST para registrar o paciente
-    fetch('http://localhost:8080/pacientes', {
+    fetch('http://localhost:8080/medicos', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token.trim()
-        },
+        headers: getDefaultHeaders(),
         body: JSON.stringify(patientData)
     })
     .then(response => {
@@ -57,8 +55,8 @@ function registerPatient(event) {
         return response.json();
     })
     .then(data => {
-        alert('Patient registered successfully!');
-        window.location.href = '../menu/menu.html'; // Redireciona após o registro bem-sucedido
+        alert('Doctor registered successfully!');
+        window.location.href = 'menu.html'; // Redireciona após o registro bem-sucedido
     })
     .catch(error => {
         document.getElementById('error-message').innerText = 'Registration failed. Please check your inputs.';
@@ -67,4 +65,4 @@ function registerPatient(event) {
 }
 
 // Adiciona um event listener para o evento 'submit' do formulário de registro
-document.querySelector('#register-form').addEventListener('submit', registerPatient);
+document.querySelector('#register-form').addEventListener('submit', registerDoctor);

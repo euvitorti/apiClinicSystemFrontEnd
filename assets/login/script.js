@@ -25,20 +25,20 @@ function login() {
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Login failed.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        localStorage.setItem('Bearer Token', data.token); // Armazena o token JWT localmente
-        window.location.href = '../menu/menu.html'; // Redireciona após o login bem-sucedido
-    })
-    .catch(error => {
-        document.getElementById('error-message').innerText = 'Login failed. Please check your credentials.';
-        console.error('Login error:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Login failed.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('Bearer Token', data.token); // Armazena o token JWT localmente
+            window.location.href = '../menu/menu.html'; // Redireciona após o login bem-sucedido
+        })
+        .catch(error => {
+            document.getElementById('error-message').innerText = 'Login failed. Please check your credentials.';
+            console.error('Login error:', error);
+        });
 }
 
 // Adiciona um event listener para o evento 'submit' do formulário de login
